@@ -4,11 +4,11 @@ import java.util.EmptyStackException;
 
 /**
  *  Trabajo Práctico N° 5
- *  Pilas
- *  Implementación ADT Pila
+  Pilas
+  Implementación ADT Pilas
  * @author Franco Quevedo
  */
-public class Pila {
+public class Pilas {
     private Nodo primero;
     private int size = 0; //Tamaño de la pila
     public static final String PILA_VACIA = "La pila está vacía.";
@@ -40,7 +40,7 @@ public class Pila {
         }
     }
 
-    public Pila() {
+    public Pilas() {
         this.primero = null;
     }
 
@@ -73,7 +73,7 @@ public class Pila {
         size++;
     }
     
-    public static void push(Pila pila, char caracter){
+    public static void push(Pilas pila, char caracter){
         pila.push(caracter);
     }
     
@@ -95,12 +95,12 @@ public class Pila {
         }
     }
     
-    public static Pila pop(Pila pila){
+    public static Pilas pop(Pilas pila){
         try{
             pila.pop();
         }
         catch(EmptyStackException e){
-            return new Pila();
+            return new Pilas();
         }
         return pila;
     }
@@ -121,7 +121,7 @@ public class Pila {
         }
     }
     
-    public static char top(Pila pila){
+    public static char top(Pilas pila){
         try{
             pila.top();
         }
@@ -158,7 +158,7 @@ public class Pila {
         }
     }
     
-    public static void mostrarPila(Pila pila){
+    public static void mostrarPila(Pilas pila){
         try{
             pila.mostrarPila();
         }

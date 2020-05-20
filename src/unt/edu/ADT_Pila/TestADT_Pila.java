@@ -1,14 +1,15 @@
-package unt.eda.Pilas;
+package unt.edu.ADT_Pila;
 
 import java.util.EmptyStackException;
 
 /**
  *  Trabajo Práctico N° 5
-  Pilas
-  Implementación ADT Pilas
+ *  Pilas
+ *  Implementación ADT Pila
  * @author Franco Quevedo
  */
-public class Test {
+public class TestADT_Pila {
+    private static IPila<Character> stack = new Pila<>();
     
     /**
      * testEsPilaVacia
@@ -16,10 +17,11 @@ public class Test {
      * Checkea la correcta implementación del metodo esPilaVacia()
      * Muestra el correspondiente mensaje si la pila está vacía o no
      */
-    public static void testEsPilaVacia(Pilas stack) {
+    public static void testEsPilaVacia() {
         boolean esPilaVacia = stack.esPilaVacia();
-        System.out.println("EsPilaVacia: " + esPilaVacia);
+        System.out.println(IPila.PILA_VACIA + esPilaVacia);
     }
+    
     
     /**
      * testPush
@@ -28,16 +30,17 @@ public class Test {
      * Utiliza el método randomChar para crear 10 letras aleatorias
      * y las agrega a la pila con push()
      */
-    public static void testPush(Pilas stack) {
-        int testSize = 10;
+    public static void testPush() {
+        int testSize = 5;
         
         for (int i = 0; i < testSize; i++){
             char rndChar = randomChar();
             
-            Pilas.push(stack, rndChar);
-            System.out.println("El caracter '" + rndChar + "' fue agregado a la pila.");
+            stack.push(rndChar);
+            System.out.println(IPila.PILA_PUSH + rndChar);
         }
     }
+    
     
     /**
      * testPop
@@ -45,14 +48,16 @@ public class Test {
      * Checkea la correcta implementación del metodo pop()
      * Muestra el correspondiente mensaje si la pila está vacía o no
      */
-    public static void testPop(Pilas stack) {
-        if (Pilas.pop(stack).esPilaVacia()) {
-            System.out.println("No se puede remover un caracter de una pila vacia.");
+    public static void testPop() {
+        try{
+            stack.pop();
+            System.out.println(IPila.PILA_POP);
         }
-        else{
-            System.out.println("El top fue removido de la pila.");
+        catch(EmptyStackException e){
+            System.out.println(IPila.PILA_POP_VACIA);
         }
     }
+    
     
     /**
      * testTop
@@ -60,13 +65,13 @@ public class Test {
      * Checkea la correcta implementación del metodo top()
      * Muestra el correspondiente mensaje si la pila está vacía o no
      */
-    public static void testTop(Pilas stack) {
+    public static void testTop() {
         try{
-            char top = Pilas.top(stack);
-            System.out.println("Top de la pila: " + top);
+            Character top = stack.top();
+            System.out.println(IPila.PILA_TOP + top);
         }
         catch(EmptyStackException e){
-            System.out.println("No se puede obtener un caracter de una pila vacia.");
+            System.out.println(IPila.PILA_TOP_VACIA);
         }
     }
     
@@ -93,12 +98,12 @@ public class Test {
  la implementacón de la clase Pilas
  Muestra el correspondiente mensaje si la pila está vacía o no
      */
-    public static void testMostrarPila(Pilas stack) {
+    public static void testMostrarPila() {
         try{
-            Pilas.mostrarPila(stack);
+            stack.mostrarPila();
         }
         catch(EmptyStackException e){
-            System.out.println(Pilas.PILA_VACIA);
+            System.out.println(IPila.PILA_VACIA);
         }
     }
 }
