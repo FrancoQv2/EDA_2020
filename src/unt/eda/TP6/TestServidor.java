@@ -1,6 +1,7 @@
 package unt.eda.TP6;
 
 import java.util.Random;
+import unt.eda.ADT_Fila.EmptyQueueException;
 
 /**
  *  Trabajo Práctico N° 6
@@ -27,7 +28,12 @@ public class TestServidor {
      * Simulo el procesamiento de peticiones en un servidor con probabilidades preterminadas por el enunciado
      */
     public static void testProcesarServidorPredet(){
-        servidor_predeterminado.procesar();
+        try{
+            servidor_predeterminado.procesar();
+        }
+        catch(EmptyQueueException e){
+            System.out.println("Hubo un error al procesar las peticiones.");
+        }
     }
     
     
@@ -37,7 +43,12 @@ public class TestServidor {
      * Simulo el procesamiento de peticiones en un servidor con probabilidades variables
      */
     public static void testProcesarServidorVariable(){
-        servidor_variable.procesar();
+        try{
+            servidor_variable.procesar();
+        }
+        catch(EmptyQueueException e){
+            System.out.println("Hubo un error al procesar las peticiones.");
+        }
     }
     
     

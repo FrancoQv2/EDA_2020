@@ -9,6 +9,7 @@ package unt.eda.ADT_Fila;
  */
 public class Fila<T> implements IFila<T> {
     private Item frente;
+    private Item cola;
     private int size = 0; //Tamaño de la fila
 
     /**
@@ -16,7 +17,7 @@ public class Fila<T> implements IFila<T> {
      * 
      * Necesaria para operar el objeto del cual estara compuesta la fila
      */
-    class Item<T> {
+    private class Item<T> {
         private T objeto;
         private Item siguiente;
         
@@ -25,7 +26,7 @@ public class Fila<T> implements IFila<T> {
             this.siguiente = null;
         }
 
-        public T getObjeto() {
+        public T getObjeto() throws NullPointerException {
             return objeto;
         }
 
@@ -42,14 +43,15 @@ public class Fila<T> implements IFila<T> {
         }
     }
 
+    /**
+     * Constructor
+     * Inicializa una fila vacia
+     */
     public Fila() {
-        this.frente = frente;
+        this.frente = null;
+        this.cola = null;
     }
-
-    public Item getFrente() {
-        return frente;
-    }
-
+    
     public int getSize() {
         return size;
     }
@@ -60,35 +62,31 @@ public class Fila<T> implements IFila<T> {
         return this.frente == null;
     }
 
+    
     @Override
     public T frente() throws EmptyQueueException { //DEVUELVE EL FRENTE DE LA FILA
         if (this.esFilaVacia()){
             throw new EmptyQueueException();
         }
         else{
-            return (T) this.getFrente().getObjeto();
+            return (T) this.frente.getObjeto();
         }
     }
-
+    
+    
     @Override
     public void enFila(T objeto) { //AGREGAR ITEM AL FINAL, A LA DERECHA
-        Item peticionNueva = new Item(objeto);
-        Item aux;
+        Item itemNuevo = new Item(objeto);
         
         if (this.esFilaVacia()) {
-            this.frente = peticionNueva; //Si la fila esta vacia le asigno a frente el nuevo item
-            size++;
+            this.frente = itemNuevo; //Si la fila esta vacia le asigno a frente el nuevo item
         } else {
-            aux = this.frente;
-           
-            while(aux.getSiguiente() != null){ //Recorro la fila hasta el ultimo item
-                aux = aux.getSiguiente();
-            }
-            
-            aux.setSiguiente(peticionNueva); //Al ultimo item le asigno como siguiente el nuevo nodo
-            size++;
+            this.cola.setSiguiente(itemNuevo);
         }
+        this.cola = itemNuevo;
+        size++;
     }
+    
     
     @Override
     public void deFila() throws EmptyQueueException { //BORRA EL PRIMER ITEM, EL DE LA IZQUIERDA

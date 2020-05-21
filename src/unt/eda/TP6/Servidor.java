@@ -21,7 +21,7 @@ public class Servidor {
 
     private int tiempo_inactivo = 0; //tiempo de inactividad del servidor
     private int contador = 0; //contador que simula el paso del tiempo
-    private int enCurso; //tiempo restante para terminar de procesar la peticion actual
+    private int enCurso = 0; //tiempo restante para terminar de procesar la peticion actual
     private int esperaMaxPrioridad; //tiempo max de espera
     private int esperaMaxComun; //tiempo max de espera
     
@@ -42,7 +42,7 @@ public class Servidor {
      * @param tiempo_total valor ingresado en [s]
      */
     public Servidor(int tiempo_total) {
-        this.tiempo_total = tiempo_total * 1000;
+        this.tiempo_total = tiempo_total * 1000; //Para que trabaje en [ms]
         this.probIngreso_peticion = 1;
         this.probIngreso_prioritaria = 10;
     }
@@ -55,7 +55,7 @@ public class Servidor {
      * @param probIngreso_prioritaria valor 0-10 ingresado en [s]
      */
     public Servidor(int tiempo_total, int probIngreso_peticion, int probIngreso_prioritaria) {
-        this.tiempo_total = tiempo_total * 1000;
+        this.tiempo_total = tiempo_total * 1000; //Para que trabaje en [ms]
         this.probIngreso_peticion = probIngreso_peticion;
         this.probIngreso_prioritaria = probIngreso_prioritaria;
     }
@@ -82,8 +82,7 @@ public class Servidor {
      */
     public boolean esUsuarioRegistrado(){
         Random rnd = new Random();
-        int probUsuarioRegistrado = 0;
-        probUsuarioRegistrado = rnd.nextInt(100); //Simula peticion prioritaria
+        int probUsuarioRegistrado = rnd.nextInt(100); //Simula peticion prioritaria
         
         return probUsuarioRegistrado <= this.probIngreso_prioritaria; //Si es menor que la probabilidad de ingreso retorna true
     }
@@ -164,11 +163,13 @@ public class Servidor {
      * Procesa las peticiones prioritarias
      */
     private void procesarPrioritarias() {
-        int espera;
         try{
+            //Usado para mostrar por pantalla la peticion prioritaria procesada y sus atributos
+            //System.out.println("Prioritaria\t\t" + this.filaPrioridad.frente().toString()); 
+            
             this.enCurso = this.filaPrioridad.frente().getTiempo();
             
-            espera = this.contador - this.filaPrioridad.frente().getT_in();
+            int espera = this.contador - this.filaPrioridad.frente().getT_in();
             this.filaPrioridad.deFila();
             
             if (this.esperaMaxPrioridad < espera) {
@@ -185,11 +186,13 @@ public class Servidor {
      * Procesa las peticiones comunes
      */
     private void procesarComunes() { 
-        int espera;
         try{
+            //Usado para mostrar por pantalla la peticion prioritaria procesada y sus atributos
+            //System.out.println("Comun\t\t\t" + this.filaComun.frente().toString());
+            
             this.enCurso = this.filaComun.frente().getTiempo();
             
-            espera = this.contador - this.filaComun.frente().getT_in();
+            int espera = this.contador - this.filaComun.frente().getT_in();
             this.filaComun.deFila();
             
             if (this.esperaMaxComun < espera) {

@@ -24,7 +24,6 @@ public class Principal {
         TestADT_Fila.testEsFilaVacia();
         TestADT_Fila.testFrente();
         TestADT_Fila.testDeFila();
-        TestADT_Fila.testMostrarFila();
         
         
         System.out.println("\n\n--------------------SIMULACION SERVIDOR--------------------------");

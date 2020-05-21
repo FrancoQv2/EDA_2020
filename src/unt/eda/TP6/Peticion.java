@@ -33,29 +33,8 @@ public class Peticion {
         this.t_in = t_in;
     }
 
-    
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + this.t_in;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Peticion other = (Peticion) obj;
-        if (this.t_in != other.t_in) {
-            return false;
-        }
-        return true;
+    public String toString() {
+        return "[ " + this.getTiempo() + " , " + this.getT_in() + " ]"; //To change body of generated methods, choose Tools | Templates.
     }
 }
